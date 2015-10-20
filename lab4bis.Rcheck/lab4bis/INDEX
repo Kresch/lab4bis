@@ -1,0 +1,14 @@
+coef.linreg             coef
+coef.ridgereg           coef ridgereg
+lab4bis-package         Linear regression
+linreg                  linreg
+plot                    plot
+pred                    pred
+predict                 predict ridge
+print ridge             print ridge
+print.linreg            print
+q                       Functions.
+resid                   resid
+ridgereg                ridgereg
+visualize_airport_delays
+                        visualize_airport_delays

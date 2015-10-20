@@ -1,0 +1,459 @@
+\nonstopmode{}
+\documentclass[a4paper]{book}
+\usepackage[times,inconsolata,hyper]{Rd}
+\usepackage{makeidx}
+\usepackage[utf8,latin1]{inputenc}
+% \usepackage{graphicx} % @USE GRAPHICX@
+\makeindex{}
+\begin{document}
+\chapter*{}
+\begin{center}
+{\textbf{\huge Package `lab4bis'}}
+\par\bigskip{\large \today}
+\end{center}
+\begin{description}
+\raggedright{}
+\item[Type]\AsIs{Package}
+\item[Title]\AsIs{Linear regression}
+\item[Version]\AsIs{1.0}
+\item[Date]\AsIs{2015-09-15}
+\item[Author]\AsIs{Niclas Lovsj<c3><b6>, Maxime Bonneau}
+\item[Maintainer]\AsIs{}\email{niclas.lovsjo@me.com}\AsIs{}
+\item[Description]\AsIs{Multiple linear regression. Mimics the lm-fun in R.}
+\item[License]\AsIs{GPL-2}
+\item[Suggests]\AsIs{testthat, knitr, rmarkdown}
+\item[VignetteBuilder]\AsIs{knitr}
+\item[NeedsCompilation]\AsIs{no}
+\end{description}
+\Rdcontents{\R{} topics documented:}
+\inputencoding{utf8}
+\HeaderA{lab4bis-package}{Linear regression}{lab4bis.Rdash.package}
+\aliasA{lab4bis}{lab4bis-package}{lab4bis}
+\keyword{package}{lab4bis-package}
+%
+\begin{Description}\relax
+Multiple linear regression. Mimics the lm-fun in R.
+\end{Description}
+%
+\begin{Details}\relax
+
+The DESCRIPTION file:
+
+\Tabular{ll}{
+Package: & lab4bis\\{}
+Type: & Package\\{}
+Title: & Linear regression\\{}
+Version: & 1.0\\{}
+Date: & 2015-09-15\\{}
+Author: & Niclas Lovsjö, Maxime Bonneau   \\{}
+Maintainer: & <niclas.lovsjo@me.com>\\{}
+Description: & Multiple linear regression. Mimics the lm-fun in R.\\{}
+License: & GPL-2\\{}
+Suggests: & testthat,
+knitr,
+rmarkdown\\{}
+VignetteBuilder: & knitr\\{}
+}
+
+Index of help topics:
+\begin{alltt}
+coef.linreg             coef
+coef.ridgereg           coef ridgereg
+lab4bis-package         Linear regression
+linreg                  linreg
+plot                    plot
+pred                    pred
+predict                 predict ridge
+print ridge             print ridge
+print.linreg            print
+q                       Functions.
+resid                   resid
+ridgereg                ridgereg
+visualize_airport_delays
+                        visualize_airport_delays
+\end{alltt}
+
+\textasciitilde{}\textasciitilde{} An overview of how to use the package, including the most important \textasciitilde{}\textasciitilde{}
+\textasciitilde{}\textasciitilde{} functions \textasciitilde{}\textasciitilde{}
+\end{Details}
+%
+\begin{Author}\relax
+Niclas Lovsjö, Maxime Bonneau   
+
+Maintainer: <niclas.lovsjo@me.com>
+\end{Author}
+%
+\begin{References}\relax
+\textasciitilde{}\textasciitilde{} Literature or other references for background information \textasciitilde{}\textasciitilde{}
+\end{References}
+%
+\begin{SeeAlso}\relax
+\textasciitilde{}\textasciitilde{} Optional links to other man pages, e.g. \textasciitilde{}\textasciitilde{}
+\textasciitilde{}\textasciitilde{} \code{\LinkA{<pkg>}{<pkg>}} \textasciitilde{}\textasciitilde{}
+\end{SeeAlso}
+%
+\begin{Examples}
+\begin{ExampleCode}
+~~ simple examples of the most important functions ~~
+\end{ExampleCode}
+\end{Examples}
+\inputencoding{utf8}
+\HeaderA{coef.linreg}{coef}{coef.linreg}
+%
+\begin{Description}\relax
+this function only separates the estimate of the coefficients apart.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+## S3 method for class 'linreg'
+coef(result)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{what}] results of the use of linreg function
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a named vector of the estimate of the coefficients
+\end{Value}
+\inputencoding{utf8}
+\HeaderA{coef.ridgereg}{coef ridgereg}{coef.ridgereg}
+%
+\begin{Description}\relax
+this function only separates the estimate of the coefficients apart.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+## S3 method for class 'ridgereg'
+coef(result)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{what}] results of the use of linreg function
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a named vector of the estimate of the coefficients
+\end{Value}
+\inputencoding{utf8}
+\HeaderA{linreg}{linreg}{linreg}
+%
+\begin{Description}\relax
+mimics the lm-function in R, i.e. makes linear regression.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+linreg(formula, data)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{a}] "formula" of the form y \textasciitilde{} x+... and a dataframe
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+an object with class "linreg", i.e. that has attributes according to linear regression.
+\end{Value}
+%
+\begin{Author}\relax
+Niclas Lovsjö \& Maxime Bonneau
+\end{Author}
+%
+\begin{References}\relax
+https://en.wikipedia.org/wiki/Linear\_regression
+\end{References}
+\inputencoding{utf8}
+\HeaderA{plot}{plot}{plot}
+%
+\begin{Description}\relax
+plots two graphs with the values calculated by linreg function :
+- one plots residuals vs fitted values
+- the other one plots the scale location, ie the square root of the
+absolute value of the residuals
+\end{Description}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{what}] results of the use of linreg function
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+the two plots described over
+\end{Value}
+\inputencoding{utf8}
+\HeaderA{pred}{pred}{pred}
+%
+\begin{Description}\relax
+this function predicts the values of the parameter we want to explain,
+ie it calculates y hat for the vector of values in parameter
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+pred(result, ...)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{what}] results of the use of linreg function, and a numeric vector, which length is the
+same as the number of coefficients.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a vector with the predicted values
+\end{Value}
+\inputencoding{utf8}
+\HeaderA{predict}{predict ridge}{predict}
+%
+\begin{Description}\relax
+this function predicts the values of the parameter we want to explain,
+ie it calculates y hat for the vector of values in parameter
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+predict(result, ...)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{what}] results of the use of ridgereg function, and a numeric vector, which length is the
+same as the number of coefficients.
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a vector with the predicted values
+\end{Value}
+\inputencoding{utf8}
+\HeaderA{print ridge}{print ridge}{print ridge}
+\aliasA{print.ridgereg}{print ridge}{print.ridgereg}
+%
+\begin{Description}\relax
+this function prints important results calculated by ridgereg function
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+## S3 method for class 'ridgereg'
+print(X)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{what}] results of the use of ridgereg function
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+the call, ie the formula of the regression, and the estimate of the coefficients,
+with their names
+\end{Value}
+\inputencoding{utf8}
+\HeaderA{print.linreg}{print}{print.linreg}
+%
+\begin{Description}\relax
+this function prints important results calculated by linreg function
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+## S3 method for class 'linreg'
+print(X)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{what}] results of the use of linreg function
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+the call, ie the formula of the regression, and the estimate of the coefficients,
+with their names
+\end{Value}
+\inputencoding{utf8}
+\HeaderA{q}{Functions.}{q}
+\keyword{datasets}{q}
+%
+\begin{Description}\relax
+Uses a GET-verb to connect to val.se and downloads a xls-file, which is
+converted and read by a read.xlsx-command into the actual data-file we need. From this
+file it extracts the things we need. The shiny app then reads this by calling the
+package Lab5, which only consists of this data.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+q
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{No}] params
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Format}
+\begin{alltt}List of 10
+ $ url        : chr "http://www.val.se/val/val2014/statistik/2014_riksdagsval_per_kommun.xls"
+ $ status_code: int 200
+ $ headers    :List of 9
+  ..$ date          : chr "Tue, 20 Oct 2015 11:34:07 GMT"
+  ..$ server        : chr "Apache"
+  ..$ last-modified : chr "Fri, 03 Oct 2014 06:18:22 GMT"
+  ..$ etag          : chr "\bsl{}"10c358-1d400-5047eb32cc780\bsl{}""
+  ..$ accept-ranges : chr "bytes"
+  ..$ content-length: chr "119808"
+  ..$ cache-control : chr "max-age=3600"
+  ..$ expires       : chr "Tue, 20 Oct 2015 12:34:07 GMT"
+  ..$ content-type  : chr "application/vnd.ms-excel"
+  ..- attr(*, "class")= chr [1:2] "insensitive" "list"
+ $ all_headers:List of 1
+  ..$ :List of 3
+  .. ..$ status : int 200
+  .. ..$ version: chr "HTTP/1.1"
+  .. ..$ headers:List of 9
+  .. .. ..$ date          : chr "Tue, 20 Oct 2015 11:34:07 GMT"
+  .. .. ..$ server        : chr "Apache"
+  .. .. ..$ last-modified : chr "Fri, 03 Oct 2014 06:18:22 GMT"
+  .. .. ..$ etag          : chr "\bsl{}"10c358-1d400-5047eb32cc780\bsl{}""
+  .. .. ..$ accept-ranges : chr "bytes"
+  .. .. ..$ content-length: chr "119808"
+  .. .. ..$ cache-control : chr "max-age=3600"
+  .. .. ..$ expires       : chr "Tue, 20 Oct 2015 12:34:07 GMT"
+  .. .. ..$ content-type  : chr "application/vnd.ms-excel"
+  .. .. ..- attr(*, "class")= chr [1:2] "insensitive" "list"
+ $ cookies    :'data.frame':	0 obs. of  7 variables:
+  ..$ domain    : logi(0) 
+  ..$ flag      : logi(0) 
+  ..$ path      : logi(0) 
+  ..$ secure    : logi(0) 
+  ..$ expiration:Classes 'POSIXct', 'POSIXt'  num(0) 
+  ..$ name      : logi(0) 
+  ..$ value     : logi(0) 
+ $ content    : raw [1:119808] d0 cf 11 e0 ...
+ $ date       : POSIXct[1:1], format: "2015-10-20 11:34:07"
+ $ times      : Named num [1:6] 0 0.00521 0.00542 0.00553 0.04721 ...
+  ..- attr(*, "names")= chr [1:6] "redirect" "namelookup" "connect" "pretransfer" ...
+ $ request    :List of 7
+  ..$ method    : chr "GET"
+  ..$ url       : chr "http://www.val.se/val/val2014/statistik/2014_riksdagsval_per_kommun.xls"
+  ..$ headers   : Named chr "application/json, text/xml, application/xml, */*"
+  .. ..- attr(*, "names")= chr "Accept"
+  ..$ fields    : NULL
+  ..$ options   :List of 2
+  .. ..$ useragent    : chr "libcurl/7.43.0 r-curl/0.9.3 httr/1.0.0"
+  .. ..$ customrequest: chr "GET"
+  ..$ auth_token: NULL
+  ..$ output    : list()
+  .. ..- attr(*, "class")= chr [1:2] "write_memory" "write_function"
+  ..- attr(*, "class")= chr "request"
+ $ handle     :Class 'curl_handle' <externalptr> 
+ - attr(*, "class")= chr "response"
+\end{alltt}
+\end{Format}
+%
+\begin{Author}\relax
+Maxime Bonneau, Niclas Lovsjö
+\end{Author}
+\inputencoding{utf8}
+\HeaderA{resid}{resid}{resid}
+%
+\begin{Description}\relax
+this function takes apart the residuals of the linear regression
+calculated by linreg function
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+resid(X)
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{what}] results of the use of linreg function
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Value}
+a vector with the resiudals
+\end{Value}
+\inputencoding{utf8}
+\HeaderA{ridgereg}{ridgereg}{ridgereg}
+\aliasA{formula}{ridgereg}{formula}
+\keyword{datasets}{ridgereg}
+%
+\begin{Description}\relax
+Uses ridge regression to fit a model.
+\end{Description}
+%
+\begin{Usage}
+\begin{verbatim}
+formula
+\end{verbatim}
+\end{Usage}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{lambda}] - hyperparameter to be tuned. if not specified, we set it to 0.
+
+\item[\code{a}] "formula" of the form y \textasciitilde{} x+... and a dataframe
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Format}
+\begin{alltt}Class 'formula' length 3 Sepal.Length ~ Sepal.Width + Petal.Width
+  ..- attr(*, ".Environment")=<environment: namespace:lab4bis> 
+\end{alltt}
+\end{Format}
+%
+\begin{Author}\relax
+Niclas Lovsjö \& Maxime Bonneau
+\end{Author}
+%
+\begin{References}\relax
+ESLII: http://web.stanford.edu/\textasciitilde{}hastie/local.ftp/Springer/OLD/ESLII\_print4.pdf
+\end{References}
+\inputencoding{utf8}
+\HeaderA{visualize\_airport\_delays}{visualize\_airport\_delays}{visualize.Rul.airport.Rul.delays}
+%
+\begin{Description}\relax
+Plots the mean delay of ﬂights for different airports by longitude and latitude using ggplot2
+\end{Description}
+%
+\begin{Arguments}
+\begin{ldescription}
+\item[\code{no}] parameters
+\end{ldescription}
+\end{Arguments}
+%
+\begin{Author}\relax
+Niclas Lovsjö \& Maxime Bonneau
+\end{Author}
+%
+\begin{References}\relax
+https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
+https://cran.r-project.org/web/packages/nycflights13/nycflights13.pdf
+\end{References}
+\printindex{}
+\end{document}

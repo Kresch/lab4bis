@@ -1,0 +1,16 @@
+lab4bis-package	lab4bis-package
+coef.linreg	coef.linreg
+coef.ridgereg	coef.ridgereg
+formula	ridgereg
+lab4bis	lab4bis-package
+linreg	linreg
+plot	plot
+pred	pred
+predict	predict
+print ridge	print-ridge
+print.linreg	print.linreg
+print.ridgereg	print-ridge
+q	q
+resid	resid
+ridgereg	ridgereg
+visualize_airport_delays	visualize_airport_delays

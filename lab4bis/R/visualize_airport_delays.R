@@ -13,15 +13,17 @@
 # install.packages("ggplot2")
 # install.packages("ggmap")
 # install.packages("rworldmap")
-library(nycflights13)
-library(dplyr)
-library(ggplot2)
-library(ggmap)
-library(rworldmap)
-data("airports")
-data("flights")
+
+
 
 visualize_airport_delays <- function(){
+        library(nycflights13)
+        library(dplyr)
+        library(ggplot2)
+        library(ggmap)
+        library(rworldmap)
+        data("airports")
+        data("flights")
         fli <- flights[is.na(flights$arr_delay)==FALSE,]
         mean_delay <- aggregate(fli$arr_delay,list(fli$dest),mean)
         names(mean_delay)<-c("faa","mean_delay")

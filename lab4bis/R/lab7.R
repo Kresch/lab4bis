@@ -12,6 +12,7 @@ ex_data<-function(theData){
   data <- data.frame(theData[,unlist(lapply(colnames(theData),function(y) substr(y,start=nchar(y)-2,stop=nchar(y))))=="tal"])
   data<-data.frame(data,theData$Rostb)
   colnames(data)<-c(colnames(theData)[unlist(lapply(colnames(theData),function(y) substr(y,start=nchar(y)-2,stop=nchar(y))))=="tal"],"Rostb")
+  set.seed(12345)
   in_train <- createDataPartition(y = data$Rostb,p=0.75,list = FALSE)
   #how to actually get the coefficients???
   model1<-train(data$Rostb[in_train]~.,data=data[in_train,],method="leapForward")

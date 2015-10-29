@@ -22,3 +22,12 @@ Predictions are done by,
 newdata<-data.frame(c(1,2,3),c(4,3,2))
 predict(model2,newdata)
 ```
+
+## "dplyr" package
+
+Thanks to "dplyr" package, we were able to calculate the mean delays from the datasets from nycflights13 package.
+This is a package in which we can find delays for several flights from New York City airports to some other American airports. We decided to use 'ggmap' to get a good visualization of these delays.
+
+```{r}
+visualize_airport_delays()
+```

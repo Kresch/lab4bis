@@ -119,6 +119,6 @@ para <- function(lan = NULL, kom = NULL, laan = NULL,
 
 
 lan_func<-function(lan){
-        kommun_vect<-c(theData$KOMMUN[theData$LäN==lan])
+        kommun_vect<-c(theData$KOMMUN[theData$LAAN==lan])
         return(kommun_vect)
 }

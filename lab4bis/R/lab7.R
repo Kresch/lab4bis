@@ -16,4 +16,5 @@ ex_data<-function(theData){
   in_train <- createDataPartition(y = data$Rostb,p=0.75,list = FALSE)
   #how to actually get the coefficients???
   model1<-train(data$Rostb[in_train]~.,data=data[in_train,],method="leapForward")
+  return(model1)
 }

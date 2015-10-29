@@ -23,7 +23,7 @@ newdata<-data.frame(c(1,2,3),c(4,3,2))
 predict(model2,newdata)
 ```
 
-<<<<<<< HEAD
+
 Now we will comment on the caret-package part. We have decided to use our own API data from lab5. In there we have data of the election of year 2014 in Sweden. We will try to build a model explaining the size of a city, in terms of people allowed to vote, by the distribution of votes the parties in that particular city has. For example, say the distribution of the great little city Filipstad has 40%(S),30%(SD),20%(V),5%(M). Then can we find a good prediction of the size of this city? The features will then be the party percentages.  
   
 First we divide the data into a training and a test set:

@@ -23,7 +23,7 @@ newdata<-data.frame(c(1,2,3),c(4,3,2))
 predict(model2,newdata)
 ```
 
-<<<<<<< HEAD
+
 Now we will comment on the caret-package part. We have decided to use our own API data from lab5. In there we have data of the election of year 2014 in Sweden. We will try to build a model explaining the size of a city, in terms of people allowed to vote, by the distribution of votes the parties in that particular city has. For example, say the distribution of the great little city Filipstad has 40%(S),30%(SD),20%(V),5%(M). Then can we find a good prediction of the size of this city? The features will then be the party percentages.  
   
 First we divide the data into a training and a test set:
@@ -39,7 +39,7 @@ divide_data<-function(theData){
   in_train <- createDataPartition(y = data$Rostb,p=0.75,list = FALSE)
   train <- theData[in_train,]
   test<-theData[-in_train,]
-  out<-list(train=train,test=test)
+  out<-list(training=train,testing=test)
   #how to actually get the coefficients???
   return(out)
 }
@@ -48,7 +48,8 @@ data<-divide_data(theData)
   
 This is how the data will look like:
 ```{r}
-data$train[1:2,]
+attach(data)
+training[1:2,]
 ```
   
 Then we fit a linear model using the caret package, and also a linear model using foreward-selection.  
@@ -60,13 +61,63 @@ fitControl <- trainControl(## 10-fold CV
   ## repeated ten times
   repeats = 10)
 set.seed(12345)
-model1<-train(data$train$Rostb~.,data=data$train,method="lm",trControl=fitControl)
+model1<-train(training$Rostb~.,data=training,method="lm",trControl=fitControl)
 set.seed(12345)
-model2<-train(data$train$Rostb~.,data=data$train,method="leapForward",trControl=fitControl)
+model2<-train(training$Rostb~.,data=training,method="leapForward",trControl=fitControl)
 ```
   
 The performance on the training set is that we get an root mse of 49129 for all of the features, which seem very high. Doing the forward-selection we get that the model with 4 features performs the best having a root mse of 1208, which is a clear improvement from all the features. The full model also only explains 0.22 while the 4 feature model explains .99. Perhaps this is even "too good", and one could suspect that this way of doing this analysis isnt that well suited. 
+  
+Now we wanna use our own ridgereg-function inside $\textit{caret}$ for different values of $\lambda$.  
+  
+```{r}
+attach(data)
+reg<-list(type="regression",library="lab4bis")
 
+reg$parameters<-data.frame(parameter="lambda",
+                             class="numeric",
+                             label="lambda")
+reg$fit<- function(x, y, param,lambda, last,classProbs, ...) {
+  out<-as.data.frame(x)
+  respname<-deparse(substitute(y))
+  temp<-strsplit(respname,"$",fixed=TRUE)[[1]][2]
+  out<-subset(out,select=-c(eval(parse(text=temp))))
+  formula<-paste(respname,"~",colnames(out)[6])
+  
+  
+  if(ncol(out) > 1){
+    for(i in c(8,10,12,14,16,18,20,22,24,26,28)){
+      formula <- paste(formula, "+", names(out)[i], sep="")
+    }
+  }
+  
+  formula <- as.formula(formula)
+  out<-cbind(out,y)
+  model <- lab4bis::ridgereg( formula = formula, data=out,lambda= param$lambda)
+  return(model)
+ }
+
+reg$predict<-function(modelFit, newdata, preProc = NULL, submodels = NULL){
+  predict(modelFit,newdata)
+}
+
+reg$prob<- list(NULL)
+
+reg$sort <- function(x) x[order(x$lambda),]
+
+reg$label<-"Ridge Regression"
+
+reg$grid<-function(x,y,len=NULL, search="grid"){
+  data.frame(#lambda=seq(from=20, to=45, by=1))
+             lambda=seq(from=0, to=200, by=10))
+}
+set.seed(12345)
+ridgeFit <- caret::train( y = training$Rostb,
+                         x = training,
+                       method = reg,
+                       trControl = fitControl
+)
+```
 
 ## "dplyr" package
 

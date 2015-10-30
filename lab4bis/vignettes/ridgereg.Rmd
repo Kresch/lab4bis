@@ -85,17 +85,21 @@ reg$fit<- function(x, y, param,lambda, last,classProbs, ...) {
   formula<-paste("Rostb ~",colnames(out)[6])
   
   temp<-data.frame(out[,6])
+  temp2<-data.frame(testing[,6])
   if(ncol(out) > 1){
     for(i in c(8,10,12,14,16,18,20,22,24,26,28)){
+      temp2<-cbind(temp2,testing[,i])
       temp<-cbind(temp,out[,i])
       formula <- paste(formula, "+", names(out)[i], sep="")
     }
   }
   colnames(temp)<-colnames(out)[c(6,8,10,12,14,16,18,20,22,24,26,28)]
+  colnames(temp2)<-colnames(out)[c(6,8,10,12,14,16,18,20,22,24,26,28)]
   out<-temp
+  testing<-temp2
   out<-cbind(out,x$Rostb)
   formula <- as.formula(formula)
-  model <- lab4bis::ridgereg( formula = formula, data=training,lambda= 5)
+  model <- ridgereg(formula = formula, data=training,lambda= 5)
   return(model)
  }
 

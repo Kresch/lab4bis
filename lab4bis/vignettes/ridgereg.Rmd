@@ -79,20 +79,23 @@ reg$parameters<-data.frame(parameter="lambda",
                              label="lambda")
 reg$fit<- function(x, y, param,lambda, last,classProbs, ...) {
   out<-as.data.frame(x)
-  respname<-deparse(substitute(y))
-  temp<-strsplit(respname,"$",fixed=TRUE)[[1]][2]
-  out<-subset(out,select=-c(eval(parse(text=temp))))
+  respname<-deparse(substitute(Rostb))
+  #temp<-strsplit(respname,"$",fixed=TRUE)[[1]][2]
+  out<-subset(out,select=-c(eval(parse(text=Rostb))))
   formula<-paste("Rostb ~",colnames(out)[6])
   
-  
+  temp<-data.frame(out[,6])
   if(ncol(out) > 1){
     for(i in c(8,10,12,14,16,18,20,22,24,26,28)){
+      temp<-cbind(temp,out[,i])
       formula <- paste(formula, "+", names(out)[i], sep="")
     }
   }
-  
+  colnames(temp)<-colnames(out)[c(6,8,10,12,14,16,18,20,22,24,26,28)]
+  out<-temp
+  out<-cbind(out,x$Rostb)
   formula <- as.formula(formula)
-  model <- lab4bis::ridgereg( formula = formula, data=as.data.frame(training),lambda= param$lambda)
+  model <- lab4bis::ridgereg( formula = formula, data=training,lambda= 5)
   return(model)
  }
 
@@ -114,7 +117,7 @@ set.seed(12345)
 ridgeFit <- caret::train( y = training$Rostb,
                          x = training,
                        method = reg,
-                       
+                       trControl = fitControl
 )
 ```
 

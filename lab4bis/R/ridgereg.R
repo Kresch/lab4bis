@@ -21,7 +21,7 @@ ridgereg<-function(formula,data,lambda=0){
         }
         #data will come as a data.frame with one y-vector and covariates in X.
         #formula defines which are which.
-        
+
         #we will use same as in linreg to define this:
         data1 <- deparse(substitute(data))
         formula1 <- c()
@@ -39,7 +39,7 @@ ridgereg<-function(formula,data,lambda=0){
                 j <- j+1
         }
         formula1 <- as.formula(formula1)
-        
+        data<-as.data.frame(data)
         #error handling, might wanna add more.
         if(!(class(formula1)=="formula"))
         {stop(cat(formula, "is not an formula!"))}
@@ -48,9 +48,9 @@ ridgereg<-function(formula,data,lambda=0){
         }
         
         #design matrix X
-        X<-model.matrix(formula,data)
+        X<-model.matrix(formula,training)
         #all.vars(formula)[2] will always be the response
-        y<-as.matrix(data[all.vars(formula1)[2]])
+        y<-as.matrix(training[all.vars(formula)[1]])
         
         #now we can use regular lin.alg. to find the needed values
         
@@ -68,7 +68,7 @@ ridgereg<-function(formula,data,lambda=0){
                 colnames(X)<-namn
         } else {
                 X<-apply(X[,c(2:ncol(X))],2,norm_data)
-                X<-cbind(Intercept=rep(1,p),X)}
+        }
         
         # colnames(X)<-c("(Intercept)",)
         #takes out intercept and normalizes X, then enter intercept after normalizing.
@@ -79,7 +79,9 @@ ridgereg<-function(formula,data,lambda=0){
 #                 return(res)
 #         }
         # solve(t(X)%*%X)%*%(t(X)%*%y)
-        beta_hat<-solve(t(X)%*%X+lambda*diag(ncol(X)))%*%(t(X)%*%y)
+        
+        
+        beta_hat<-solve(t(as.matrix(X))%*%as.matrix(X)+lambda*diag(ncol(X)))%*%(t(as.matrix(X))%*%(y))
         fitted.values<-X%*%beta_hat
         result<-list(coefficients=beta_hat,fitted.values=fitted.values,
                      call=call("ridgereg",formula))

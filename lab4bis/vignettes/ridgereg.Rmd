@@ -114,7 +114,7 @@ set.seed(12345)
 ridgeFit <- caret::train( y = training$Rostb,
                          x = training,
                        method = reg,
-                       trControl = fitControl
+                       
 )
 ```
 

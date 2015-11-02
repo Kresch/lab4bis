@@ -12,7 +12,7 @@ library(roxygen2)
 #' @author Maxime Bonneau, Niclas Lovsjö
 #'
 #'
-
+#jhc
 
 q<-GET("http://www.val.se/val/val2014/statistik/2014_riksdagsval_per_kommun.xls")
 kommun<-content(q,"raw")
